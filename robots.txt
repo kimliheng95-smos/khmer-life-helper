@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kimliheng95-smos.github.io/khmer-life-helper/sitemap.xml
