@@ -7,8 +7,15 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-white border-bottom sticky-top shadow-sm">
       <div className="container">
-        <Link className="navbar-brand fw-bold text-primary" to="/">
-          🇰🇭 Khmer Life Helper
+        <Link className="navbar-brand fw-bold text-primary d-flex align-items-center gap-2" to="/">
+          <img
+            src={`${import.meta.env.BASE_URL}logo.svg`}
+            alt="Khmer Life Helper"
+            width="36"
+            height="36"
+            className="brand-logo"
+          />
+          <span className="brand-text">Khmer Life Helper</span>
         </Link>
 
         <button

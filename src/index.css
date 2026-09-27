@@ -1561,3 +1561,18 @@ body.khmer option {
     padding: 35px;
   }
 }
+
+
+/* Brand logo */
+.brand-logo {
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.navbar-brand .brand-text {
+  white-space: nowrap;
+}
+@media (max-width: 400px) {
+  .navbar-brand .brand-text {
+    font-size: 0.95rem;
+  }
+}

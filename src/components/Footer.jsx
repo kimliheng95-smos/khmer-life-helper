@@ -9,7 +9,16 @@ function Footer() {
       <div className="container py-5">
         <div className="row g-4">
           <div className="col-lg-5">
-            <h5 className="fw-bold">🇰🇭 Khmer Life Helper</h5>
+            <h5 className="fw-bold d-flex align-items-center gap-2">
+              <img
+                src={`${import.meta.env.BASE_URL}logo.svg`}
+                alt="Khmer Life Helper"
+                width="28"
+                height="28"
+                className="brand-logo"
+              />
+              Khmer Life Helper
+            </h5>
 
             <p className="text-secondary mt-3 mb-2">{t("footer.tagline")}</p>
 
