@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import AdBanner from "./components/AdBanner";
@@ -29,57 +29,38 @@ import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Navbar />
 
       <Routes>
-        {/* Home */}
         <Route path="/" element={<Home />} />
 
-        {/* Student */}
         <Route path="/student" element={<Student />} />
-
         <Route path="/student/scholarships" element={<ScholarshipFinder />} />
-
         <Route path="/student/majors" element={<MajorGuide />} />
-
         <Route path="/student/study-guide" element={<StudyGuide />} />
-
         <Route path="/student/learning-roadmap" element={<LearningRoadmap />} />
 
-        {/* Career */}
         <Route path="/career" element={<Career />} />
-
         <Route path="/career/cv-builder" element={<CVBuilder />} />
-
         <Route path="/career/interview" element={<InterviewPractice />} />
-
         <Route path="/career/internships" element={<InternshipFinder />} />
-
         <Route path="/career/roadmap" element={<CareerRoadmap />} />
 
-        {/* Life */}
         <Route path="/life" element={<Life />} />
-
         <Route path="/life/budget" element={<BudgetPlanner />} />
-
         <Route path="/life/planner" element={<LifePlanner />} />
-
         <Route path="/life/checklists" element={<UsefulChecklists />} />
-
         <Route path="/life/goals" element={<GoalPlanner />} />
 
-        {/* Next Step */}
         <Route path="/next-step" element={<NextStep />} />
 
-        {/* Dashboard */}
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
 
       <AdBanner />
-
       <Footer />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
