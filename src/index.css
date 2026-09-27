@@ -10,11 +10,9 @@
   --success: #16a34a;
   --danger: #dc2626;
   --warning: #f59e0b;
-
   --dark: #0f172a;
   --text: #1e293b;
   --muted: #64748b;
-
   --border: #e2e8f0;
   --light: #f8fafc;
   --lighter: #f1f5f9;
@@ -191,6 +189,20 @@ body.khmer option {
   align-items: center;
   justify-content: center;
   font-size: 32px;
+}
+
+/* Home Hero Badge */
+
+.home-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 18px;
+  padding: 8px 14px !important;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .category-card {
@@ -1200,6 +1212,14 @@ body.khmer option {
     font-size: 0.9rem;
   }
 
+  /* Home Badge */
+  .home-badge {
+    margin-top: 12px;
+    margin-bottom: 18px;
+    padding: 7px 12px !important;
+    font-size: 0.82rem;
+  }
+
   .hero-card,
   .student-hero-card,
   .career-hero-card,
@@ -1460,6 +1480,18 @@ body.khmer option {
 
   .navbar-brand {
     font-size: 0.88rem;
+  }
+
+  .navbar-toggler {
+    margin-left: 8px;
+  }
+
+  /* Home Badge */
+  .home-badge {
+    margin-top: 14px;
+    margin-bottom: 16px;
+    padding: 6px 11px !important;
+    font-size: 0.78rem;
   }
 
   .display-4 {

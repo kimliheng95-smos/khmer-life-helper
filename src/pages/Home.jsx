@@ -11,7 +11,7 @@ function Home() {
         <div className="container">
           <div className="row align-items-center min-vh-75">
             <div className="col-lg-6">
-              <span className="badge bg-primary-subtle text-primary mb-3 px-3 py-2">
+              <span className="home-badge badge bg-primary-subtle text-primary px-3 py-2">
                 🇰🇭 {t("home.badge")}
               </span>
 
