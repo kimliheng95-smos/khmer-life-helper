@@ -22,9 +22,25 @@ function Footer() {
 
             <p className="text-secondary mt-3 mb-2">{t("footer.tagline")}</p>
 
-            <p className="text-secondary small mb-0">
+            <p className="text-secondary small mb-3">
               {t("footer.description")}
             </p>
+
+            {/* Author photo */}
+            <div className="d-flex align-items-center gap-3">
+              <img
+                src={`${import.meta.env.BASE_URL}author.jpg`}
+                alt="Kim Liheng"
+                width="48"
+                height="48"
+                className="rounded-circle border"
+                style={{ objectFit: "cover" }}
+              />
+              <div>
+                <div className="fw-semibold small">Kim Liheng</div>
+                <div className="text-secondary small">Creator</div>
+              </div>
+            </div>
           </div>
 
           <div className="col-6 col-lg-2">
@@ -34,15 +50,12 @@ function Footer() {
               <li>
                 <Link to="/">{t("footer.links.home")}</Link>
               </li>
-
               <li>
                 <Link to="/student">{t("footer.links.student")}</Link>
               </li>
-
               <li>
                 <Link to="/career">{t("footer.links.career")}</Link>
               </li>
-
               <li>
                 <Link to="/life">{t("footer.links.life")}</Link>
               </li>
@@ -56,17 +69,14 @@ function Footer() {
               <li>
                 <Link to="/next-step">{t("footer.links.nextStep")}</Link>
               </li>
-
               <li>
                 <Link to="/dashboard">{t("footer.links.dashboard")}</Link>
               </li>
-
               <li>
                 <Link to="/career/cv-builder">
                   {t("footer.links.cvBuilder")}
                 </Link>
               </li>
-
               <li>
                 <Link to="/life/budget">{t("footer.links.budgetPlanner")}</Link>
               </li>
@@ -86,7 +96,6 @@ function Footer() {
               >
                 <i className="bi bi-facebook"></i>
               </a>
-
               <a
                 href="https://t.me"
                 target="_blank"
@@ -96,7 +105,6 @@ function Footer() {
               >
                 <i className="bi bi-telegram"></i>
               </a>
-
               <a
                 href="https://tiktok.com"
                 target="_blank"
