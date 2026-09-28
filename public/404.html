@@ -5,18 +5,28 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- GitHub Pages SPA fallback -->
     <script>
       const path = window.location.pathname;
+      const search = window.location.search;
+      const hash = window.location.hash;
 
-      sessionStorage.setItem("redirect", window.location.href);
+      const base = "/khmer-life-helper/";
 
-      window.location.replace("/khmer-life-helper/");
+      const route = path.startsWith(base)
+        ? path.slice(base.length)
+        : path.replace(/^\/+/, "");
+
+      const redirectUrl =
+        base + "?redirect=" + encodeURIComponent(route + search + hash);
+
+      window.location.replace(redirectUrl);
     </script>
 
     <title>Khmer Life Helper</title>
   </head>
 
   <body>
-    Redirecting...
+    <p>Redirecting...</p>
   </body>
 </html>

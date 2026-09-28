@@ -7,17 +7,14 @@
 
     <!-- GitHub Pages SPA redirect -->
     <script>
-      (function () {
-        const redirect = sessionStorage.getItem("redirect");
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.get("redirect");
 
-        if (redirect) {
-          sessionStorage.removeItem("redirect");
+      if (redirect) {
+        const target = "/" + redirect;
 
-          if (redirect !== window.location.href) {
-            window.history.replaceState(null, null, redirect);
-          }
-        }
-      })();
+        window.history.replaceState(null, "", target);
+      }
     </script>
 
     <title>Khmer Life Helper | Student, Career & Life Tools</title>
