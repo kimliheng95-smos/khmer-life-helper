@@ -2100,112 +2100,110 @@ const en = {
     },
   },
   cvBuilder: {
-    badge: "CV BUILDER",
-    title: "Build Your Professional CV",
-    description:
-      "Create a clean CV that highlights your education, skills, projects, and experience.",
-    personalInformation: "Personal Information",
-    fullName: "Full Name",
-    jobTitle: "Job Title",
-    phone: "Phone",
-    email: "Email",
-    location: "Location",
-    website: "Website",
-    summary: "Professional Summary",
-    education: "Education",
-    skills: "Skills",
-    projects: "Projects",
-    experience: "Experience",
-    languages: "Languages",
-    addEducation: "Add Education",
-    addSkill: "Add Skill",
-    addProject: "Add Project",
-    addExperience: "Add Experience",
-    addLanguage: "Add Language",
-    remove: "Remove",
-    clearCV: "Clear CV",
-    printCV: "Print / Save PDF",
-    preview: {
-      title: "CV Preview",
-      live: "Live Preview",
-      print: "Print / Save PDF",
-      yourName: "Your Name",
-      professionalTitle: "Professional Title",
-      sections: {
-        profile: "Profile",
-        education: "Education",
-        skills: "Skills",
-        projects: "Projects",
-        experience: "Experience",
-        languages: "Languages",
-      },
-      placeholders: {
-        degree: "Degree",
-        school: "School",
-        project: "Project name",
-        company: "Company",
-        position: "Position",
-      },
-      technologies: "Technologies",
-      section: "Section",
-    },
-    placeholders: {
-      fullName: "Enter your full name",
-      jobTitle: "Enter your job title",
-      phone: "Enter your phone number",
-      email: "Enter your email",
-      location: "Enter your location",
-      website: "Enter your website",
-      summary: "Write a short professional summary...",
-      school: "School / University",
-      degree: "Degree / Major",
-      year: "Year",
-      description: "Description",
-      skill: "Skill name",
-      projectName: "Project name",
-      technologies: "Technologies used",
-      projectLink: "Project link",
-      company: "Company name",
-      position: "Position",
-      duration: "Duration",
-      language: "Language",
-    },
-    heroTitle: "Build Your Professional CV",
+    badge: "CV Builder",
+    heroTitle: "Create Your CV",
     heroDescription:
-      "Create a clean CV that highlights your education, skills, projects, and experience.",
+      "Build a professional CV quickly and easily with our CV Builder.",
+
     form: {
       title: "CV Information",
-      description: "Fill in your details and see the live preview.",
+      description: "Enter your information below.",
     },
-    messages: {
-      clearConfirm: "Are you sure you want to clear all CV data?",
-    },
+
     buttons: {
-      clear: "Clear CV",
+      clear: "Clear",
+      removePhoto: "Remove Photo",
       add: "Add",
       remove: "Remove",
     },
+
     sections: {
       personal: "Personal Information",
-      summary: "Professional Summary",
+      summary: "Profile Summary",
       education: "Education",
       skills: "Skills",
       projects: "Projects",
-      experience: "Experience",
+      experience: "Work Experience",
       languages: "Languages",
     },
+
     fields: {
       fullName: "Full Name",
       jobTitle: "Job Title",
+      photo: "Profile Photo",
       phone: "Phone",
       email: "Email",
       location: "Location",
       website: "Website",
     },
+
     labels: {
       education: "Education",
       project: "Project",
       experience: "Experience",
+    },
+
+    placeholders: {
+      fullName: "e.g. Kim Liheng",
+      jobTitle: "e.g. Website & App Trainer",
+      phone: "e.g. 012 345 678",
+      email: "e.g. example@gmail.com",
+      location: "e.g. Phnom Penh, Cambodia",
+      website: "e.g. https://example.com",
+
+      summary:
+        "Write a short professional summary about yourself and your experience...",
+
+      school: "School / University",
+      degree: "Degree / Major",
+      year: "Year / Date",
+      description: "Description",
+
+      skill: "e.g. HTML, CSS, JavaScript",
+
+      projectName: "Project name",
+      projectDescription: "Project description",
+      technologies: "Technologies used",
+      projectLink: "Project link",
+
+      company: "Company name",
+      position: "Position",
+      duration: "Duration",
+      responsibilities: "Responsibilities / Description",
+
+      language: "e.g. Khmer - Native",
+    },
+
+    preview: {
+      title: "CV Preview",
+      live: "Live Preview",
+      print: "Print / Save PDF",
+
+      yourName: "Your Name",
+      professionalTitle: "Professional Title",
+
+      sections: {
+        profile: "PROFILE",
+        education: "EDUCATION",
+        skills: "SKILLS",
+        projects: "PROJECTS",
+        experience: "EXPERIENCE",
+        languages: "LANGUAGES",
+      },
+
+      placeholders: {
+        degree: "Degree",
+        school: "School",
+        project: "Project",
+        position: "Position",
+        company: "Company",
+      },
+
+      technologies: "Technologies",
+    },
+
+    messages: {
+      clearConfirm: "Are you sure you want to clear all CV information?",
     },
   },
   interviewPractice: {

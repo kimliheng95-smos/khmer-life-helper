@@ -2088,112 +2088,108 @@ const kh = {
     },
   },
   cvBuilder: {
-    badge: "កម្មវិធីបង្កើត CV",
-    title: "បង្កើត CV ដែលមានវិជ្ជាជីវៈ",
-    description:
-      "បង្កើត CV ស្អាតដែលបង្ហាញពីការសិក្សា ជំនាញ គម្រោង និងបទពិសោធន៍របស់អ្នក។",
-    personalInformation: "ព័ត៌មានផ្ទាល់ខ្លួន",
-    fullName: "ឈ្មោះពេញ",
-    jobTitle: "មុខតំណែង",
-    phone: "លេខទូរស័ព្ទ",
-    email: "អ៊ីមែល",
-    location: "ទីតាំង",
-    website: "គេហទំព័រ",
-    summary: "សេចក្តីសង្ខេបអំពីខ្លួន",
-    education: "ការសិក្សា",
-    skills: "ជំនាញ",
-    projects: "គម្រោង",
-    experience: "បទពិសោធន៍",
-    languages: "ភាសា",
-    addEducation: "បន្ថែមការសិក្សា",
-    addSkill: "បន្ថែមជំនាញ",
-    addProject: "បន្ថែមគម្រោង",
-    addExperience: "បន្ថែមបទពិសោធន៍",
-    addLanguage: "បន្ថែមភាសា",
-    remove: "លុប",
-    clearCV: "សម្អាត CV",
-    printCV: "បោះពុម្ព / រក្សាទុកជា PDF",
+    badge: "បង្កើត CV",
+    heroTitle: "បង្កើត CV របស់អ្នក",
+    heroDescription: "បង្កើត CV ប្រកបដោយវិជ្ជាជីវៈបានយ៉ាងរហ័ស និងងាយស្រួល។",
+
+    form: {
+      title: "ព័ត៌មាន CV",
+      description: "បញ្ចូលព័ត៌មានរបស់អ្នកនៅខាងក្រោម។",
+    },
+
+    buttons: {
+      clear: "សម្អាត",
+      removePhoto: "លុបរូបថត",
+      add: "បន្ថែម",
+      remove: "លុប",
+    },
+
+    sections: {
+      personal: "ព័ត៌មានផ្ទាល់ខ្លួន",
+      summary: "សង្ខេបអំពីខ្លួន",
+      education: "ការអប់រំ",
+      skills: "ជំនាញ",
+      projects: "គម្រោង",
+      experience: "បទពិសោធន៍ការងារ",
+      languages: "ភាសា",
+    },
+
+    fields: {
+      fullName: "ឈ្មោះពេញ",
+      jobTitle: "មុខតំណែង",
+      photo: "រូបថត Profile",
+      phone: "លេខទូរស័ព្ទ",
+      email: "អ៊ីមែល",
+      location: "ទីតាំង",
+      website: "គេហទំព័រ",
+    },
+
+    labels: {
+      education: "ការអប់រំ",
+      project: "គម្រោង",
+      experience: "បទពិសោធន៍",
+    },
+
+    placeholders: {
+      fullName: "ឧ. គីម លីហេង",
+      jobTitle: "ឧ. Website & App Trainer",
+      phone: "ឧ. 012 345 678",
+      email: "ឧ. example@gmail.com",
+      location: "ឧ. ភ្នំពេញ ប្រទេសកម្ពុជា",
+      website: "ឧ. https://example.com",
+
+      summary: "សរសេរសង្ខេបខ្លីៗអំពីខ្លួនអ្នក និងបទពិសោធន៍របស់អ្នក...",
+
+      school: "សាលា / សាកលវិទ្យាល័យ",
+      degree: "សញ្ញាបត្រ / ជំនាញ",
+      year: "ឆ្នាំ / កាលបរិច្ឆេទ",
+      description: "ការពិពណ៌នា",
+
+      skill: "ឧ. HTML, CSS, JavaScript",
+
+      projectName: "ឈ្មោះគម្រោង",
+      projectDescription: "ការពិពណ៌នាគម្រោង",
+      technologies: "បច្ចេកវិទ្យាដែលបានប្រើ",
+      projectLink: "តំណភ្ជាប់គម្រោង",
+
+      company: "ឈ្មោះក្រុមហ៊ុន",
+      position: "មុខតំណែង",
+      duration: "រយៈពេល",
+      responsibilities: "ភារកិច្ច / ការពិពណ៌នា",
+
+      language: "ឧ. ខ្មែរ - ភាសាកំណើត",
+    },
+
     preview: {
       title: "មើល CV",
-      live: "មើលភ្លាមៗ",
-      print: "បោះពុម្ព / រក្សាទុក PDF",
+      live: "ការមើលជាមុនផ្ទាល់",
+      print: "បោះពុម្ព / រក្សាទុកជា PDF",
+
       yourName: "ឈ្មោះរបស់អ្នក",
-      professionalTitle: "តួនាទីវិជ្ជាជីវៈ",
+      professionalTitle: "មុខតំណែង",
+
       sections: {
-        profile: "ប្រវត្តិ",
-        education: "ការសិក្សា",
+        profile: "ប្រវត្តិរូប",
+        education: "ការអប់រំ",
         skills: "ជំនាញ",
         projects: "គម្រោង",
         experience: "បទពិសោធន៍",
         languages: "ភាសា",
       },
+
       placeholders: {
         degree: "សញ្ញាបត្រ",
         school: "សាលា",
-        project: "ឈ្មោះគម្រោង",
+        project: "គម្រោង",
+        position: "មុខតំណែង",
         company: "ក្រុមហ៊ុន",
-        position: "តួនាទី",
       },
+
       technologies: "បច្ចេកវិទ្យា",
-      section: "ផ្នែក",
     },
-    placeholders: {
-      fullName: "បញ្ចូលឈ្មោះពេញរបស់អ្នក",
-      jobTitle: "បញ្ចូលមុខតំណែងរបស់អ្នក",
-      phone: "បញ្ចូលលេខទូរស័ព្ទរបស់អ្នក",
-      email: "បញ្ចូលអ៊ីមែលរបស់អ្នក",
-      location: "បញ្ចូលទីតាំងរបស់អ្នក",
-      website: "បញ្ចូលគេហទំព័ររបស់អ្នក",
-      summary: "សរសេរសេចក្តីសង្ខេបខ្លីអំពីខ្លួន...",
-      school: "សាលា / សាកលវិទ្យាល័យ",
-      degree: "សញ្ញាបត្រ / ជំនាញ",
-      year: "ឆ្នាំ",
-      description: "ពិពណ៌នា",
-      skill: "ឈ្មោះជំនាញ",
-      projectName: "ឈ្មោះគម្រោង",
-      technologies: "បច្ចេកវិទ្យាប្រើប្រាស់",
-      projectLink: "តំណភ្ជាប់គម្រោង",
-      company: "ឈ្មោះក្រុមហ៊ុន",
-      position: "តួនាទី",
-      duration: "រយៈពេល",
-      language: "ភាសា",
-    },
-    heroTitle: "បង្កើត CV វិជ្ជាជីវៈរបស់អ្នក",
-    heroDescription:
-      "បង្កើត CV ច្បាស់លាស់ ដែលបង្ហាញការសិក្សា ជំនាញ គម្រោង និងបទពិសោធន៍។",
-    form: {
-      title: "ព័ត៌មាន CV",
-      description: "បំពេញព័ត៌មានរបស់អ្នក ហើយមើល preview ភ្លាមៗ។",
-    },
+
     messages: {
-      clearConfirm: "តើអ្នកប្រាកដថាចង់សម្អាតទិន្នន័យ CV ទាំងអស់មែនទេ?",
-    },
-    buttons: {
-      clear: "សម្អាត CV",
-      add: "បន្ថែម",
-      remove: "លុប",
-    },
-    sections: {
-      personal: "ព័ត៌មានផ្ទាល់ខ្លួន",
-      summary: "សេចក្តីសង្ខេបវិជ្ជាជីវៈ",
-      education: "ការសិក្សា",
-      skills: "ជំនាញ",
-      projects: "គម្រោង",
-      experience: "បទពិសោធន៍",
-      languages: "ភាសា",
-    },
-    fields: {
-      fullName: "ឈ្មោះពេញ",
-      jobTitle: "តួនាទីការងារ",
-      phone: "ទូរស័ព្ទ",
-      email: "អ៊ីមែល",
-      location: "ទីតាំង",
-      website: "គេហទំព័រ",
-    },
-    labels: {
-      education: "ការសិក្សា",
-      project: "គម្រោង",
-      experience: "បទពិសោធន៍",
+      clearConfirm: "តើអ្នកប្រាកដថាចង់លុបព័ត៌មាន CV ទាំងអស់មែនទេ?",
     },
   },
   interviewPractice: {
