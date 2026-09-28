@@ -29,10 +29,11 @@ import GoalPlanner from "./pages/GoalPlanner";
 // Other
 import NextStep from "./pages/NextStep";
 import Dashboard from "./pages/Dashboard";
-
+import SEO from "./components/SEO";
 function App() {
   return (
     <BrowserRouter basename="/khmer-life-helper">
+       <SEO />
       <Navbar />
 
       <Routes>
