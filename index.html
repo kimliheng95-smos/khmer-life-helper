@@ -11,7 +11,9 @@
       const redirect = params.get("redirect");
 
       if (redirect) {
-        const target = "/" + redirect;
+        const base = "/khmer-life-helper/";
+
+        const target = base + redirect.replace(/^\/+/, "");
 
         window.history.replaceState(null, "", target);
       }
