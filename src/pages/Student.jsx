@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+
 import { useLanguage } from "../context/LanguageContext";
+
 import ToolCard from "../components/ToolCard";
 
 function Student() {
@@ -42,7 +44,6 @@ function Student() {
 
   return (
     <>
-      {/* Hero */}
       <section className="student-hero py-5">
         <div className="container">
           <div className="row align-items-center">
@@ -77,7 +78,6 @@ function Student() {
         </div>
       </section>
 
-      {/* Student Tools */}
       <section className="py-5">
         <div className="container">
           <div className="text-center mb-5">
@@ -102,7 +102,6 @@ function Student() {
         </div>
       </section>
 
-      {/* Study Planner */}
       <section className="student-next-step py-5">
         <div className="container">
           <div className="row align-items-center">
@@ -124,7 +123,6 @@ function Student() {
                 className="btn btn-primary btn-lg px-4"
               >
                 {t("student.plannerButton")}
-
                 <i className="bi bi-arrow-right ms-2"></i>
               </Link>
             </div>
