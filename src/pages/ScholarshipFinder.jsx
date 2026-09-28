@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function ScholarshipFinder() {
   const { t } = useLanguage();
@@ -679,3 +679,4 @@ function ScholarshipFinder() {
 }
 
 export default ScholarshipFinder;
+

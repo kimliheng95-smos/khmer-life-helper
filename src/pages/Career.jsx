@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import ToolCard from "../components/ToolCard";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function Career() {
   const { t } = useLanguage();
@@ -130,3 +130,4 @@ function Career() {
 }
 
 export default Career;
+

@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function Navbar() {
   const { language, changeLanguage, t } = useLanguage();
@@ -125,3 +125,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

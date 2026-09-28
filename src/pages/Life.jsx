@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import ToolCard from "../components/ToolCard";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function Life() {
   const { t } = useLanguage();
@@ -125,3 +125,4 @@ function Life() {
 }
 
 export default Life;
+

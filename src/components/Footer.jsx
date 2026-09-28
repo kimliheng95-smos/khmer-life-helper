@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function Footer() {
   const { t } = useLanguage();
@@ -88,7 +88,7 @@ function Footer() {
 
             <div className="d-flex gap-3 mt-3">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/KimLiheng.77/?_rdc=6&_rdr#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -96,8 +96,9 @@ function Footer() {
               >
                 <i className="bi bi-facebook"></i>
               </a>
+
               <a
-                href="https://t.me"
+                href="https://t.me/HENG77777"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -105,8 +106,9 @@ function Footer() {
               >
                 <i className="bi bi-telegram"></i>
               </a>
+
               <a
-                href="https://tiktok.com"
+                href="https://www.tiktok.com/@hengg899?_r=1&_t=ZS-9A1HcAsdsLh"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -129,3 +131,4 @@ function Footer() {
 }
 
 export default Footer;
+

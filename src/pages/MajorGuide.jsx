@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function MajorGuide() {
   const { t } = useLanguage();
@@ -511,3 +511,4 @@ function MajorGuide() {
 }
 
 export default MajorGuide;
+

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function GoalPlanner() {
   const { t } = useLanguage();
@@ -490,3 +490,4 @@ function GoalPlanner() {
 }
 
 export default GoalPlanner;
+

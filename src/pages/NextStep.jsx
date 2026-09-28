@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function NextStep() {
   const { t } = useLanguage();
@@ -14,11 +14,13 @@ function NextStep() {
       const saved = localStorage.getItem("khmer-life-helper-completed-tasks");
 
       if (saved) {
-        return JSON.parse(saved);
+        const parsedTasks = JSON.parse(saved);
+
+        return Array.isArray(parsedTasks) ? parsedTasks : [];
       }
 
       return [];
-    } catch (error) {
+    } catch {
       return [];
     }
   });
@@ -56,7 +58,13 @@ function NextStep() {
         name: "year",
         label: t("nextStep.questions.internship.year.label"),
         type: "select",
-        options: [t("nextStep.options.year1"), t("nextStep.options.year2"), t("nextStep.options.year3"), t("nextStep.options.year4"), t("nextStep.options.graduated")],
+        options: [
+          t("nextStep.options.year1"),
+          t("nextStep.options.year2"),
+          t("nextStep.options.year3"),
+          t("nextStep.options.year4"),
+          t("nextStep.options.graduated"),
+        ],
       },
       {
         name: "major",
@@ -106,7 +114,12 @@ function NextStep() {
         name: "level",
         label: t("nextStep.questions.skill.level.label"),
         type: "select",
-        options: [t("nextStep.options.completeBeginner"), t("nextStep.options.beginner"), t("nextStep.options.intermediate"), t("nextStep.options.advanced")],
+        options: [
+          t("nextStep.options.completeBeginner"),
+          t("nextStep.options.beginner"),
+          t("nextStep.options.intermediate"),
+          t("nextStep.options.advanced"),
+        ],
       },
       {
         name: "reason",
@@ -639,16 +652,6 @@ function NextStep() {
       },
     ],
   };
-
-  useEffect(function () {
-    const savedGoal = localStorage.getItem("khmer-life-helper-goal");
-
-    if (savedGoal && plans[savedGoal]) {
-      setGoal(savedGoal);
-      setStarted(true);
-      setShowPlan(true);
-    }
-  }, []);
 
   useEffect(
     function () {
@@ -1389,3 +1392,4 @@ function NextStep() {
 }
 
 export default NextStep;
+

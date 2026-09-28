@@ -1,31 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function Dashboard() {
   const { t } = useLanguage();
 
-  const [goal, setGoal] = useState("");
-  const [completedTasks, setCompletedTasks] = useState([]);
+  const [goal] = useState(function () {
+    return localStorage.getItem("khmer-life-helper-goal") || "";
+  });
 
-  useEffect(function () {
-    const savedGoal = localStorage.getItem("khmer-life-helper-goal");
+  const [completedTasks, setCompletedTasks] = useState(function () {
     const savedTasks = localStorage.getItem(
       "khmer-life-helper-completed-tasks",
     );
 
-    if (savedGoal) {
-      setGoal(savedGoal);
+    if (!savedTasks) {
+      return [];
     }
 
-    if (savedTasks) {
-      try {
-        setCompletedTasks(JSON.parse(savedTasks));
-      } catch (error) {
-        setCompletedTasks([]);
-      }
+    try {
+      const parsedTasks = JSON.parse(savedTasks);
+
+      return Array.isArray(parsedTasks) ? parsedTasks : [];
+    } catch {
+      return [];
     }
-  }, []);
+  });
 
   const plans = {
     "Find an Internship": [
@@ -520,15 +520,11 @@ function Dashboard() {
 
   function toggleTask(taskId) {
     setCompletedTasks(function (previousTasks) {
-      let newTasks = [];
-
-      if (previousTasks.includes(taskId)) {
-        newTasks = previousTasks.filter(function (id) {
-          return id !== taskId;
-        });
-      } else {
-        newTasks = [...previousTasks, taskId];
-      }
+      const newTasks = previousTasks.includes(taskId)
+        ? previousTasks.filter(function (id) {
+            return id !== taskId;
+          })
+        : [...previousTasks, taskId];
 
       localStorage.setItem(
         "khmer-life-helper-completed-tasks",
@@ -870,3 +866,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
+

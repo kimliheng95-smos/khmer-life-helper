@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 import ToolCard from "../components/ToolCard";
 
@@ -134,3 +134,4 @@ function Student() {
 }
 
 export default Student;
+

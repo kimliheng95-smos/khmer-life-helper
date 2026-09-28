@@ -1,4 +1,4 @@
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function AdBanner() {
   const { t } = useLanguage();
@@ -14,3 +14,4 @@ function AdBanner() {
 }
 
 export default AdBanner;
+

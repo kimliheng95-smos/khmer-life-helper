@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function InterviewPractice() {
   const { t } = useLanguage();
@@ -495,3 +495,4 @@ function InterviewPractice() {
 }
 
 export default InterviewPractice;
+

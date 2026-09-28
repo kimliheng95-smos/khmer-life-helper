@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function CVBuilder() {
   const { t } = useLanguage();
@@ -1117,3 +1117,4 @@ function CVBuilder() {
 }
 
 export default CVBuilder;
+

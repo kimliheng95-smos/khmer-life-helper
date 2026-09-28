@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function BudgetPlanner() {
   const { t } = useLanguage();
@@ -482,3 +482,4 @@ function BudgetPlanner() {
 }
 
 export default BudgetPlanner;
+

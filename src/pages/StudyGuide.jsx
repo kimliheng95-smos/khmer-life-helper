@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function StudyGuide() {
   const { t } = useLanguage();
@@ -562,3 +562,4 @@ function StudyGuide() {
 }
 
 export default StudyGuide;
+

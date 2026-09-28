@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../context/useLanguage";
 
 function Home() {
   const { t } = useLanguage();
@@ -238,3 +238,4 @@ function Home() {
 }
 
 export default Home;
+
