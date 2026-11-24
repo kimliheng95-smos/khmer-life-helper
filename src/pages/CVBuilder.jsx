@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { ProgressRing } from "../components/Motion";
 
 function CVBuilder() {
   const { t } = useLanguage();
+  const [accent, setAccent] = useState("blue");
 
   const initialCV = {
     fullName: "",
@@ -356,33 +359,82 @@ function CVBuilder() {
     window.print();
   }
 
+  const completeness = useMemo(() => {
+    const checks = [
+      Boolean(cv.fullName.trim()),
+      Boolean(cv.jobTitle.trim()),
+      Boolean(cv.phone.trim() || cv.email.trim()),
+      Boolean(cv.summary.trim()),
+      cv.education.some((e) => e.school.trim() || e.degree.trim()),
+      cv.skills.some((s) => s.trim()),
+      cv.projects.some((p) => p.name.trim()) ||
+        cv.experience.some((ex) => ex.company.trim() || ex.position.trim()),
+      cv.languages.some((l) => l.trim()),
+    ];
+    const score = checks.filter(Boolean).length;
+    return Math.round((score / checks.length) * 100);
+  }, [cv]);
+
+  const accentThemes = [
+    { id: "blue", color: "#2563eb", label: "Blue" },
+    { id: "indigo", color: "#4f46e5", label: "Indigo" },
+    { id: "emerald", color: "#059669", label: "Emerald" },
+    { id: "slate", color: "#0f172a", label: "Slate" },
+  ];
+
   // =========================
   // RETURN
   // =========================
 
   return (
-    <main className="cv-builder-page py-5">
-      <div className="container">
-        {/* HERO */}
-        <div className="text-center mb-5">
-          <span className="badge bg-primary-subtle text-primary px-3 py-2 mb-3">
-            <i className="bi bi-file-earmark-person me-2"></i>
-            {t("cvBuilder.badge")}
-          </span>
+    <main className="cv-builder-page pb-5">
+      <PageHero
+        badge={t("cvBuilder.badge")}
+        badgeIcon="bi-file-earmark-person"
+        title={t("cvBuilder.heroTitle")}
+        subtitle={t("cvBuilder.heroDescription")}
+        color="primary"
+        breadcrumbs={[
+          { label: t("navbar.career"), to: "/career" },
+          { label: t("career.tools.cv.title") },
+        ]}
+        aside={
+          <div className="card border-0 shadow-sm rounded-4">
+            <div className="card-body p-4 d-flex align-items-center justify-content-between gap-3">
+              <div>
+                <small className="text-secondary d-block mb-1">
+                  {t("ui.cv.completeness")}
+                </small>
+                <h5 className="fw-bold mb-2">
+                  {cv.fullName || t("cvBuilder.preview.yourName")}
+                </h5>
+                <button
+                  type="button"
+                  className="btn btn-dark btn-sm"
+                  onClick={printCV}
+                >
+                  <i className="bi bi-printer me-2"></i>
+                  {t("cvBuilder.preview.print")}
+                </button>
+              </div>
+              <ProgressRing
+                value={completeness}
+                size={84}
+                strokeWidth={7}
+                color="#2563eb"
+              />
+            </div>
+          </div>
+        }
+      />
 
-          <h1 className="display-5 fw-bold">{t("cvBuilder.heroTitle")}</h1>
-
-          <p className="lead text-secondary">
-            {t("cvBuilder.heroDescription")}
-          </p>
-        </div>
-
+      <div className="container pt-5">
         <div className="row g-4">
           {/* =========================
               LEFT - FORM
           ========================= */}
 
-          <div className="col-lg-5">
+          <div className="col-lg-5 cv-form-area">
             <div className="card border-0 shadow-sm">
               <div className="card-body p-4">
                 {/* FORM HEADER */}
@@ -885,24 +937,44 @@ function CVBuilder() {
           ========================= */}
 
           <div className="col-lg-7">
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <div>
-                <h4 className="fw-bold mb-1">{t("cvBuilder.preview.title")}</h4>
+            <div className="cv-preview-wrapper">
+              <div className="cv-preview-toolbar d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3 p-3 bg-white rounded-4 border shadow-xs">
+                <div>
+                  <h5 className="fw-bold mb-0">{t("cvBuilder.preview.title")}</h5>
+                  <small className="text-secondary">
+                    {t("cvBuilder.preview.live")}
+                  </small>
+                </div>
 
-                <small className="text-secondary">
-                  {t("cvBuilder.preview.live")}
-                </small>
+                <div className="d-flex align-items-center gap-3">
+                  <div className="d-flex align-items-center gap-2">
+                    <small className="text-secondary fw-semibold">
+                      {t("ui.cv.accentColor")}:
+                    </small>
+                    {accentThemes.map((item) => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        aria-label={item.label}
+                        className={`cv-accent-dot ${
+                          accent === item.id ? "is-active" : ""
+                        }`}
+                        style={{ backgroundColor: item.color }}
+                        onClick={() => setAccent(item.id)}
+                      />
+                    ))}
+                  </div>
+
+                  <button type="button" className="btn btn-dark" onClick={printCV}>
+                    <i className="bi bi-printer me-2"></i>
+                    {t("cvBuilder.preview.print")}
+                  </button>
+                </div>
               </div>
 
-              <button type="button" className="btn btn-dark" onClick={printCV}>
-                <i className="bi bi-printer me-2"></i>
-                {t("cvBuilder.preview.print")}
-              </button>
-            </div>
+              {/* CV PAPER */}
 
-            {/* CV PAPER */}
-
-            <div className="cv-paper">
+              <div className="cv-paper" data-accent={accent}>
               {/* HEADER */}
 
               <div className="cv-header">
@@ -1108,6 +1180,7 @@ function CVBuilder() {
                   </div>
                 </section>
               )}
+            </div>
             </div>
           </div>
         </div>

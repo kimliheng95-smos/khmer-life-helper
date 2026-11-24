@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { ProgressRing, Reveal } from "../components/Motion";
 
 function StudyGuide() {
   const { t } = useLanguage();
@@ -174,27 +176,28 @@ function StudyGuide() {
   }
 
   return (
-    <main className="study-guide-page py-5">
-      <div className="container">
-        {/* Header */}
-        <div className="text-center mb-5">
-          <span className="badge bg-warning-subtle text-warning-emphasis px-3 py-2 mb-3">
-            📚 {t("studyGuide.badge")}
-          </span>
-
-          <h1 className="display-5 fw-bold">
+    <main className="study-guide-page pb-5">
+      <PageHero
+        badge={`📚 ${t("studyGuide.badge")}`}
+        title={
+          <>
             {t("studyGuide.heroTitleLine1")}
             <br />
-            {t("studyGuide.heroTitleLine2")}
-          </h1>
+            <span className="text-warning-emphasis">
+              {t("studyGuide.heroTitleLine2")}
+            </span>
+          </>
+        }
+        subtitle={t("studyGuide.heroDescription")}
+        color="warning"
+        align="center"
+        breadcrumbs={[
+          { label: t("navbar.student"), to: "/student" },
+          { label: t("student.tools.study.title") },
+        ]}
+      />
 
-          <p
-            className="lead text-secondary mx-auto"
-            style={{ maxWidth: "700px" }}
-          >
-            {t("studyGuide.heroDescription")}
-          </p>
-        </div>
+      <div className="container pt-5">
 
         <div className="row g-4">
           {/* Form */}
@@ -394,28 +397,37 @@ function StudyGuide() {
                     </div>
 
                     {/* Progress */}
-                    <div className="bg-light rounded-4 p-3 mb-4">
-                      <div className="d-flex justify-content-between align-items-center mb-2">
-                        <strong>{t("studyGuide.plan.progress")}</strong>
+                    <div className="bg-light rounded-4 p-3 mb-4 d-flex align-items-center justify-content-between gap-3">
+                      <div className="flex-grow-1">
+                        <div className="d-flex justify-content-between align-items-center mb-2">
+                          <strong>{t("studyGuide.plan.progress")}</strong>
 
-                        <span className="fw-bold text-primary">
-                          {progress}%
-                        </span>
+                          <span className="fw-bold text-primary">
+                            {progress}%
+                          </span>
+                        </div>
+
+                        <div className="progress" style={{ height: "10px" }}>
+                          <div
+                            className="progress-bar"
+                            role="progressbar"
+                            style={{ width: `${progress}%` }}
+                          ></div>
+                        </div>
+
+                        <small className="text-secondary d-block mt-2">
+                          {completedCount} {t("studyGuide.plan.of")}{" "}
+                          {activeSessions.length}{" "}
+                          {t("studyGuide.plan.sessionsCompleted")}
+                        </small>
                       </div>
 
-                      <div className="progress" style={{ height: "10px" }}>
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: `${progress}%` }}
-                        ></div>
-                      </div>
-
-                      <small className="text-secondary d-block mt-2">
-                        {completedCount} {t("studyGuide.plan.of")}{" "}
-                        {activeSessions.length}{" "}
-                        {t("studyGuide.plan.sessionsCompleted")}
-                      </small>
+                      <ProgressRing
+                        value={progress}
+                        size={68}
+                        strokeWidth={6}
+                        color="#2563eb"
+                      />
                     </div>
 
                     <h5 className="fw-bold mb-3">
@@ -513,21 +525,23 @@ function StudyGuide() {
             {studyMethods.map(function (method, index) {
               return (
                 <div className="col-md-6 col-lg-3" key={method.title}>
-                  <div className="card border-0 shadow-sm rounded-4 h-100">
-                    <div className="card-body p-4">
-                      <div className="bg-primary-subtle text-primary rounded-3 p-3 d-inline-block">
-                        <i className={`bi ${method.icon} fs-4`}></i>
+                  <Reveal delay={index * 80} className="h-100">
+                    <div className="card border-0 shadow-sm rounded-4 h-100 klh-hover-lift">
+                      <div className="card-body p-4">
+                        <div className="bg-primary-subtle text-primary rounded-3 p-3 d-inline-block">
+                          <i className={`bi ${method.icon} fs-4`}></i>
+                        </div>
+
+                        <h5 className="fw-bold mt-3">
+                          {index + 1}. {method.title}
+                        </h5>
+
+                        <p className="text-secondary mb-0">
+                          {method.description}
+                        </p>
                       </div>
-
-                      <h5 className="fw-bold mt-3">
-                        {index + 1}. {method.title}
-                      </h5>
-
-                      <p className="text-secondary mb-0">
-                        {method.description}
-                      </p>
                     </div>
-                  </div>
+                  </Reveal>
                 </div>
               );
             })}

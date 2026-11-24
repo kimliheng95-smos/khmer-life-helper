@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { ProgressRing, Reveal } from "../components/Motion";
 
 function UsefulChecklists() {
   const { t } = useLanguage();
@@ -96,26 +98,28 @@ function UsefulChecklists() {
   const progress = (completedCount / currentChecklist.items.length) * 100;
 
   return (
-    <main className="useful-checklists-page py-5">
-      <div className="container">
-        <div className="text-center mb-5">
-          <span className="badge bg-warning-subtle text-warning-emphasis px-3 py-2 mb-3">
-            ✅ {t("usefulChecklists.badge")}
-          </span>
-
-          <h1 className="display-5 fw-bold">
+    <main className="useful-checklists-page pb-5">
+      <PageHero
+        badge={`✅ ${t("usefulChecklists.badge")}`}
+        title={
+          <>
             {t("usefulChecklists.heroTitleLine1")}
             <br />
-            {t("usefulChecklists.heroTitleLine2")}
-          </h1>
+            <span className="text-warning-emphasis">
+              {t("usefulChecklists.heroTitleLine2")}
+            </span>
+          </>
+        }
+        subtitle={t("usefulChecklists.heroDescription")}
+        color="warning"
+        align="center"
+        breadcrumbs={[
+          { label: t("navbar.life"), to: "/life" },
+          { label: t("life.tools.checklists.title") },
+        ]}
+      />
 
-          <p
-            className="lead text-secondary mx-auto"
-            style={{ maxWidth: "700px" }}
-          >
-            {t("usefulChecklists.heroDescription")}
-          </p>
-        </div>
+      <div className="container pt-5">
 
         <div className="row g-4">
           <div className="col-lg-4">
@@ -156,19 +160,22 @@ function UsefulChecklists() {
           <div className="col-lg-8">
             <div className="card border-0 shadow-sm rounded-4">
               <div className="card-body p-4">
-                <div className="d-flex justify-content-between align-items-start mb-4">
-                  <div>
-                    <div className={`text-${currentChecklist.color} fs-2 mb-2`}>
-                      <i className={`bi ${currentChecklist.icon}`}></i>
+                <div className="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+                  <div className="d-flex align-items-center gap-3">
+                    <ProgressRing
+                      value={progress}
+                      size={70}
+                      strokeWidth={6}
+                      color="#2563eb"
+                    />
+                    <div>
+                      <h3 className="fw-bold mb-1">{currentChecklist.title}</h3>
+                      <p className="text-secondary mb-0">
+                        {completedCount} {t("usefulChecklists.progress.of")}{" "}
+                        {currentChecklist.items.length}{" "}
+                        {t("usefulChecklists.progress.completed")}
+                      </p>
                     </div>
-
-                    <h3 className="fw-bold mb-1">{currentChecklist.title}</h3>
-
-                    <p className="text-secondary mb-0">
-                      {completedCount} {t("usefulChecklists.progress.of")}{" "}
-                      {currentChecklist.items.length}{" "}
-                      {t("usefulChecklists.progress.completed")}
-                    </p>
                   </div>
 
                   <button
@@ -238,9 +245,9 @@ function UsefulChecklists() {
           </div>
         </div>
 
-        <div className="row mt-5 g-4">
+        <Reveal className="row mt-5 g-4">
           <div className="col-md-4">
-            <div className="card border-0 bg-primary-subtle rounded-4 h-100">
+            <div className="card border-0 bg-primary-subtle rounded-4 h-100 klh-hover-lift">
               <div className="card-body p-4">
                 <i className="bi bi-check2-circle text-primary fs-2"></i>
 
@@ -272,7 +279,7 @@ function UsefulChecklists() {
           </div>
 
           <div className="col-md-4">
-            <div className="card border-0 bg-warning-subtle rounded-4 h-100">
+            <div className="card border-0 bg-warning-subtle rounded-4 h-100 klh-hover-lift">
               <div className="card-body p-4">
                 <i className="bi bi-stars text-warning fs-2"></i>
 
@@ -286,7 +293,7 @@ function UsefulChecklists() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </main>
   );

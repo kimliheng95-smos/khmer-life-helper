@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { Reveal } from "../components/Motion";
 
 function InternshipFinder() {
   const { t } = useLanguage();
@@ -215,25 +217,21 @@ function InternshipFinder() {
   }
 
   return (
-    <main className="internship-finder-page py-5">
-      <div className="container">
-        <div className="text-center mb-5">
-          <span className="badge bg-warning-subtle text-warning-emphasis px-3 py-2 mb-3">
-            <i className="bi bi-briefcase me-2"></i>
-            {t("internshipFinder.badge")}
-          </span>
+    <main className="internship-finder-page pb-5">
+      <PageHero
+        badge={t("internshipFinder.badge")}
+        badgeIcon="bi-briefcase"
+        title={t("internshipFinder.heroTitle")}
+        subtitle={t("internshipFinder.heroDescription")}
+        color="warning"
+        align="center"
+        breadcrumbs={[
+          { label: t("navbar.career"), to: "/career" },
+          { label: t("career.tools.internship.title") },
+        ]}
+      />
 
-          <h1 className="display-5 fw-bold">
-            {t("internshipFinder.heroTitle")}
-          </h1>
-
-          <p
-            className="lead text-secondary mx-auto"
-            style={{ maxWidth: "750px" }}
-          >
-            {t("internshipFinder.heroDescription")}
-          </p>
-        </div>
+      <div className="container pt-5">
 
         <div className="card border-0 shadow-sm rounded-4 mb-4">
           <div className="card-body p-4">
@@ -409,7 +407,7 @@ function InternshipFinder() {
 
                   return (
                     <div
-                      className={`card border-0 shadow-sm rounded-4 ${
+                      className={`card border-0 shadow-sm rounded-4 klh-hover-lift ${
                         isSelected
                           ? "border border-warning"
                           : ""
@@ -652,9 +650,9 @@ function InternshipFinder() {
           </div>
         </div>
 
-        <div className="row mt-5 g-4">
+        <Reveal className="row mt-5 g-4">
           <div className="col-md-4">
-            <div className="card border-0 bg-primary-subtle rounded-4 h-100">
+            <div className="card border-0 bg-primary-subtle rounded-4 h-100 klh-hover-lift">
               <div className="card-body p-4">
                 <i className="bi bi-file-earmark-person text-primary fs-2"></i>
 
@@ -690,7 +688,7 @@ function InternshipFinder() {
           </div>
 
           <div className="col-md-4">
-            <div className="card border-0 bg-warning-subtle rounded-4 h-100">
+            <div className="card border-0 bg-warning-subtle rounded-4 h-100 klh-hover-lift">
               <div className="card-body p-4">
                 <i className="bi bi-chat-dots text-warning fs-2"></i>
 
@@ -706,7 +704,7 @@ function InternshipFinder() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </main>
   );

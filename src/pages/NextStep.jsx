@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { ProgressRing, Reveal } from "../components/Motion";
 
 function NextStep() {
   const { t } = useLanguage();
@@ -956,87 +958,141 @@ function NextStep() {
       ? 0
       : Math.round((completedCurrentTasks.length / totalTasks) * 100);
 
+  const currentStep = !started ? 1 : !showPlan ? 2 : 3;
+
   return (
     <main>
-      <section className="next-step-hero py-5">
-        <div className="container">
-          <div className="row align-items-center g-4">
-            <div className="col-lg-7">
-              <span className="badge bg-primary-subtle text-primary mb-3">
-                <i className="bi bi-compass me-2"></i>
-                {t("nextStep.hero.badge")}
-              </span>
+      <PageHero
+        badge={t("nextStep.hero.badge")}
+        badgeIcon="bi-compass"
+        title={t("nextStep.hero.title")}
+        subtitle={t("nextStep.hero.description")}
+        color="primary"
+        breadcrumbs={[{ label: t("navbar.nextStep") }]}
+        aside={
+          <div className="card border-0 shadow-sm rounded-4">
+            <div className="card-body p-4">
+              <div className="d-flex align-items-center justify-content-between mb-3">
+                {[
+                  { num: 1, label: t("ui.nextStep.step1") },
+                  { num: 2, label: t("ui.nextStep.step2") },
+                  { num: 3, label: t("ui.nextStep.step3") },
+                ].map((step) => {
+                  const done = currentStep > step.num;
+                  const active = currentStep === step.num;
+                  return (
+                    <div
+                      key={step.num}
+                      className="d-flex flex-column align-items-center text-center flex-fill"
+                    >
+                      <span
+                        className={`rounded-circle d-inline-flex align-items-center justify-content-center fw-bold mb-2 ${
+                          done
+                            ? "bg-success text-white"
+                            : active
+                              ? "bg-primary text-white shadow-sm"
+                              : "bg-light text-secondary border"
+                        }`}
+                        style={{ width: "38px", height: "38px" }}
+                      >
+                        {done ? <i className="bi bi-check-lg"></i> : step.num}
+                      </span>
+                      <small
+                        className={
+                          active ? "fw-bold text-primary" : "text-secondary"
+                        }
+                      >
+                        {step.label}
+                      </small>
+                    </div>
+                  );
+                })}
+              </div>
 
-              <h1 className="display-5 fw-bold mb-3">
-                {t("nextStep.hero.title")}
-              </h1>
-
-              <p className="lead text-secondary mb-0">
-                {t("nextStep.hero.description")}
-              </p>
-            </div>
-
-            <div className="col-lg-5 text-center">
-              <i
-                className="bi bi-signpost-split-fill text-primary"
-                style={{ fontSize: "130px" }}
-              ></i>
+              {started && showPlan ? (
+                <div className="d-flex align-items-center justify-content-between pt-2 border-top">
+                  <div>
+                    <small className="text-secondary d-block">
+                      {t("nextStep.progress.title")}
+                    </small>
+                    <strong className="text-dark">{selectedGoal?.title}</strong>
+                  </div>
+                  <ProgressRing
+                    value={progress}
+                    size={64}
+                    strokeWidth={6}
+                    color="#2563eb"
+                  />
+                </div>
+              ) : (
+                <div className="text-center small text-secondary pt-2 border-top">
+                  <i className="bi bi-signpost-split text-primary me-2"></i>
+                  {t("home.journeyStart")}
+                </div>
+              )}
             </div>
           </div>
-        </div>
-      </section>
+        }
+      />
 
-      <section className="py-5">
+      <section className="py-5 bg-light">
         <div className="container">
           {!started && (
             <>
-              <div className="text-center mb-5">
+              <Reveal className="text-center mb-5">
                 <h2 className="fw-bold">{t("nextStep.choose.title")}</h2>
 
                 <p className="text-secondary">
                   {t("nextStep.choose.description")}
                 </p>
-              </div>
+              </Reveal>
 
               <div className="row g-4">
-                {goals.map(function (item) {
+                {goals.map(function (item, index) {
                   const active = goal === item.id;
 
                   return (
                     <div className="col-md-6 col-lg-3" key={item.id}>
-                      <div
-                        className={
-                          "goal-card h-100 " +
-                          (active ? "goal-card-active" : "")
-                        }
-                        onClick={function () {
-                          setGoal(item.id);
-                        }}
-                        style={{ cursor: "pointer" }}
-                      >
-                        <div className="goal-icon">
-                          <i className={"bi " + item.icon}></i>
+                      <Reveal delay={index * 70} className="h-100">
+                        <div
+                          className={
+                            "goal-card h-100 " +
+                            (active ? "goal-card-active" : "")
+                          }
+                          onClick={function () {
+                            setGoal(item.id);
+                          }}
+                          style={{ cursor: "pointer" }}
+                        >
+                          <div className="d-flex justify-content-between align-items-center w-100">
+                            <div className="goal-icon">
+                              <i className={"bi " + item.icon}></i>
+                            </div>
+                            {active && (
+                              <i className="bi bi-check-circle-fill text-primary fs-4"></i>
+                            )}
+                          </div>
+
+                          <h5 className="fw-bold mt-2 mb-1">{item.title}</h5>
+
+                          <p className="text-secondary small mb-0">
+                            {item.description}
+                          </p>
                         </div>
-
-                        <h5 className="fw-bold mt-3">{item.title}</h5>
-
-                        <p className="text-secondary small mb-0">
-                          {item.description}
-                        </p>
-                      </div>
+                      </Reveal>
                     </div>
                   );
                 })}
               </div>
 
               {goal && (
-                <div className="text-center mt-5">
+                <div className="text-center mt-5 klh-anim-fade-up">
                   <button
                     type="button"
-                    className="btn btn-primary btn-lg px-5"
+                    className="btn btn-primary btn-lg px-5 py-3 klh-arrow-hover"
                     onClick={handleStart}
                   >
-                    {t("nextStep.choose.continue")}
+                    <span>{t("nextStep.choose.continue")}</span>
                     <i className="bi bi-arrow-right ms-2"></i>
                   </button>
                 </div>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { ProgressRing, Reveal } from "../components/Motion";
 
 function BudgetPlanner() {
   const { t } = useLanguage();
@@ -64,12 +66,72 @@ function BudgetPlanner() {
       }
     }
 
+    const breakdown = [
+      {
+        key: "housing",
+        label: t("budgetPlanner.expenses.housing"),
+        amount: housing,
+        color: "#2563eb",
+      },
+      {
+        key: "food",
+        label: t("budgetPlanner.expenses.food"),
+        amount: food,
+        color: "#059669",
+      },
+      {
+        key: "transportation",
+        label: t("budgetPlanner.expenses.transportation"),
+        amount: transportation,
+        color: "#d97706",
+      },
+      {
+        key: "education",
+        label: t("budgetPlanner.expenses.education"),
+        amount: education,
+        color: "#4f46e5",
+      },
+      {
+        key: "bills",
+        label: t("budgetPlanner.expenses.bills"),
+        amount: bills,
+        color: "#0891b2",
+      },
+      {
+        key: "entertainment",
+        label: t("budgetPlanner.expenses.entertainment"),
+        amount: entertainment,
+        color: "#e11d48",
+      },
+      {
+        key: "other",
+        label: t("budgetPlanner.expenses.other"),
+        amount: other,
+        color: "#64748b",
+      },
+    ].filter((item) => item.amount > 0);
+
     setResult({
       income,
       savingsGoal,
       totalExpenses,
       remaining,
       savingsProgress,
+      breakdown,
+    });
+  }
+
+  function fillSample() {
+    setForm({
+      income: "450",
+      savingsGoal: "120",
+      housing: "110",
+      food: "120",
+      transportation: "35",
+      education: "45",
+      bills: "25",
+      entertainment: "20",
+      other: "15",
     });
   }
 
@@ -90,45 +152,58 @@ function BudgetPlanner() {
   }
 
   return (
-    <main className="budget-planner-page py-5">
-      <div className="container">
-        <div className="text-center mb-5">
-          <span className="badge bg-primary-subtle text-primary px-3 py-2 mb-3">
-            💰 {t("budgetPlanner.badge")}
-          </span>
-
-          <h1 className="display-5 fw-bold">
+    <main className="budget-planner-page pb-5">
+      <PageHero
+        badge={`💰 ${t("budgetPlanner.badge")}`}
+        title={
+          <>
             {t("budgetPlanner.heroTitleLine1")}
             <br />
-            {t("budgetPlanner.heroTitleLine2")}
-          </h1>
+            <span className="klh-gradient-text">
+              {t("budgetPlanner.heroTitleLine2")}
+            </span>
+          </>
+        }
+        subtitle={t("budgetPlanner.heroDescription")}
+        color="primary"
+        align="center"
+        breadcrumbs={[
+          { label: t("navbar.life"), to: "/life" },
+          { label: t("life.tools.budget.title") },
+        ]}
+      />
 
-          <p
-            className="lead text-secondary mx-auto"
-            style={{ maxWidth: "700px" }}
-          >
-            {t("budgetPlanner.heroDescription")}
-          </p>
-        </div>
+      <div className="container pt-5">
 
         <div className="row g-4">
           <div className="col-lg-7">
             <div className="card border-0 shadow-sm rounded-4">
               <div className="card-body p-4">
-                <div className="d-flex align-items-center mb-4">
-                  <div className="bg-primary-subtle text-primary rounded-3 p-3 me-3">
-                    <i className="bi bi-wallet2 fs-4"></i>
+                <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4">
+                  <div className="d-flex align-items-center">
+                    <div className="bg-primary-subtle text-primary rounded-3 p-3 me-3">
+                      <i className="bi bi-wallet2 fs-4"></i>
+                    </div>
+
+                    <div>
+                      <h4 className="fw-bold mb-1">
+                        {t("budgetPlanner.form.title")}
+                      </h4>
+
+                      <p className="text-secondary mb-0">
+                        {t("budgetPlanner.form.description")}
+                      </p>
+                    </div>
                   </div>
 
-                  <div>
-                    <h4 className="fw-bold mb-1">
-                      {t("budgetPlanner.form.title")}
-                    </h4>
-
-                    <p className="text-secondary mb-0">
-                      {t("budgetPlanner.form.description")}
-                    </p>
-                  </div>
+                  <button
+                    type="button"
+                    className="btn btn-outline-primary btn-sm"
+                    onClick={fillSample}
+                  >
+                    <i className="bi bi-magic me-1"></i>
+                    {t("ui.budget.sampleButton")}
+                  </button>
                 </div>
 
                 <form onSubmit={calculateBudget}>
@@ -408,32 +483,83 @@ function BudgetPlanner() {
                       </strong>
                     </div>
 
-                    <div className="mt-2">
-                      <div className="d-flex justify-content-between mb-2">
-                        <span className="fw-semibold">
-                          {t("budgetPlanner.summary.savingsGoal")}
-                        </span>
+                    <div className="mt-3 p-3 rounded-4 bg-light border d-flex align-items-center justify-content-between gap-3">
+                      <div className="flex-grow-1">
+                        <div className="d-flex justify-content-between mb-2">
+                          <span className="fw-semibold">
+                            {t("budgetPlanner.summary.savingsGoal")}
+                          </span>
 
-                        <span className="text-secondary">
-                          ${result.savingsGoal.toFixed(2)}
-                        </span>
+                          <span className="text-secondary fw-semibold">
+                            ${result.savingsGoal.toFixed(2)}
+                          </span>
+                        </div>
+
+                        <div className="progress mb-2" style={{ height: "10px" }}>
+                          <div
+                            className="progress-bar bg-success"
+                            role="progressbar"
+                            style={{
+                              width: `${result.savingsProgress}%`,
+                            }}
+                          ></div>
+                        </div>
+
+                        <small className="text-secondary">
+                          {result.savingsProgress.toFixed(0)}%{" "}
+                          {t("budgetPlanner.summary.ofSavingsGoal")}
+                        </small>
                       </div>
 
-                      <div className="progress" style={{ height: "10px" }}>
-                        <div
-                          className="progress-bar bg-success"
-                          role="progressbar"
-                          style={{
-                            width: `${result.savingsProgress}%`,
-                          }}
-                        ></div>
-                      </div>
-
-                      <small className="text-secondary">
-                        {result.savingsProgress.toFixed(0)}%{" "}
-                        {t("budgetPlanner.summary.ofSavingsGoal")}
-                      </small>
+                      <ProgressRing
+                        value={result.savingsProgress}
+                        size={72}
+                        strokeWidth={6}
+                        color="#059669"
+                      />
                     </div>
+
+                    {result.breakdown && result.breakdown.length > 0 && (
+                      <div className="mt-4">
+                        <h6 className="fw-bold mb-3">
+                          {t("ui.budget.breakdownTitle")}
+                        </h6>
+
+                        <div className="d-grid gap-2">
+                          {result.breakdown.map((item) => {
+                            const share =
+                              result.totalExpenses > 0
+                                ? Math.round(
+                                    (item.amount / result.totalExpenses) * 100,
+                                  )
+                                : 0;
+
+                            return (
+                              <div key={item.key}>
+                                <div className="d-flex justify-content-between small mb-1">
+                                  <span className="fw-medium">{item.label}</span>
+                                  <span className="text-secondary">
+                                    ${item.amount.toFixed(0)} ({share}%)
+                                  </span>
+                                </div>
+                                <div
+                                  className="progress"
+                                  style={{ height: "7px" }}
+                                >
+                                  <div
+                                    className="progress-bar"
+                                    style={{
+                                      width: `${share}%`,
+                                      backgroundColor: item.color,
+                                    }}
+                                  ></div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
 
                     <div
                       className={`alert mt-4 ${
@@ -459,7 +585,7 @@ function BudgetPlanner() {
           </div>
         </div>
 
-        <div className="row mt-5">
+        <Reveal className="row mt-5">
           <div className="col-12">
             <div className="bg-primary-subtle rounded-4 p-4">
               <div className="d-flex">
@@ -475,7 +601,7 @@ function BudgetPlanner() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </main>
   );

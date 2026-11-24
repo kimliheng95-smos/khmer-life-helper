@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { Reveal } from "../components/Motion";
 
 function LifePlanner() {
   const { t } = useLanguage();
@@ -57,26 +59,28 @@ function LifePlanner() {
   }
 
   return (
-    <main className="life-planner-page py-5">
-      <div className="container">
-        <div className="text-center mb-5">
-          <span className="badge bg-success-subtle text-success px-3 py-2 mb-3">
-            📅 {t("lifePlanner.badge")}
-          </span>
-
-          <h1 className="display-5 fw-bold">
+    <main className="life-planner-page pb-5">
+      <PageHero
+        badge={`📅 ${t("lifePlanner.badge")}`}
+        title={
+          <>
             {t("lifePlanner.heroTitleLine1")}
             <br />
-            {t("lifePlanner.heroTitleLine2")}
-          </h1>
+            <span className="text-success">
+              {t("lifePlanner.heroTitleLine2")}
+            </span>
+          </>
+        }
+        subtitle={t("lifePlanner.heroDescription")}
+        color="success"
+        align="center"
+        breadcrumbs={[
+          { label: t("navbar.life"), to: "/life" },
+          { label: t("life.tools.planner.title") },
+        ]}
+      />
 
-          <p
-            className="lead text-secondary mx-auto"
-            style={{ maxWidth: "700px" }}
-          >
-            {t("lifePlanner.heroDescription")}
-          </p>
-        </div>
+      <div className="container pt-5">
 
         <div className="row g-4">
           <div className="col-lg-7">
@@ -426,9 +430,9 @@ function LifePlanner() {
           </div>
         </div>
 
-        <div className="row mt-5">
+        <Reveal className="row mt-5">
           <div className="col-md-4 mb-3 mb-md-0">
-            <div className="card border-0 bg-primary-subtle rounded-4 h-100">
+            <div className="card border-0 bg-primary-subtle rounded-4 h-100 klh-hover-lift">
               <div className="card-body p-4">
                 <i className="bi bi-bullseye text-primary fs-2"></i>
 
@@ -460,7 +464,7 @@ function LifePlanner() {
           </div>
 
           <div className="col-md-4">
-            <div className="card border-0 bg-warning-subtle rounded-4 h-100">
+            <div className="card border-0 bg-warning-subtle rounded-4 h-100 klh-hover-lift">
               <div className="card-body p-4">
                 <i className="bi bi-stars text-warning fs-2"></i>
 
@@ -474,7 +478,7 @@ function LifePlanner() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </main>
   );

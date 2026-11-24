@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { Reveal } from "../components/Motion";
 
 function MajorGuide() {
   const { t } = useLanguage();
@@ -193,27 +195,28 @@ function MajorGuide() {
   }
 
   return (
-    <main className="major-guide-page py-5">
-      <div className="container">
-        {/* Header */}
-        <div className="text-center mb-5">
-          <span className="badge bg-success-subtle text-success px-3 py-2 mb-3">
-            🧭 {t("majorGuide.badge")}
-          </span>
-
-          <h1 className="display-5 fw-bold">
+    <main className="major-guide-page pb-5">
+      <PageHero
+        badge={`🧭 ${t("majorGuide.badge")}`}
+        title={
+          <>
             {t("majorGuide.heroTitleLine1")}
             <br />
-            {t("majorGuide.heroTitleLine2")}
-          </h1>
+            <span className="text-success">
+              {t("majorGuide.heroTitleLine2")}
+            </span>
+          </>
+        }
+        subtitle={t("majorGuide.heroDescription")}
+        color="success"
+        align="center"
+        breadcrumbs={[
+          { label: t("navbar.student"), to: "/student" },
+          { label: t("student.tools.major.title") },
+        ]}
+      />
 
-          <p
-            className="lead text-secondary mx-auto"
-            style={{ maxWidth: "700px" }}
-          >
-            {t("majorGuide.heroDescription")}
-          </p>
-        </div>
+      <div className="container pt-5">
 
         {/* Filter */}
         <div className="card border-0 shadow-sm rounded-4 mb-4">
@@ -283,47 +286,49 @@ function MajorGuide() {
 
         {/* Major Cards */}
         <div className="row g-4">
-          {filteredMajors.map(function (major) {
+          {filteredMajors.map(function (major, index) {
             return (
               <div className="col-md-6 col-lg-4" key={major.id}>
-                <div className="card border-0 shadow-sm rounded-4 h-100">
-                  <div className="card-body p-4 d-flex flex-column">
-                    <div className="d-flex justify-content-between align-items-start mb-3">
-                      <div
-                        className={`bg-${major.color}-subtle text-${major.color} rounded-3 p-3`}
-                      >
-                        <i className={`bi ${major.icon} fs-4`}></i>
+                <Reveal delay={(index % 3) * 80} className="h-100" immediate>
+                  <div className="card border-0 shadow-sm rounded-4 h-100 klh-hover-lift">
+                    <div className="card-body p-4 d-flex flex-column">
+                      <div className="d-flex justify-content-between align-items-start mb-3">
+                        <div
+                          className={`bg-${major.color}-subtle text-${major.color} rounded-3 p-3`}
+                        >
+                          <i className={`bi ${major.icon} fs-4`}></i>
+                        </div>
+
+                        <span className="badge bg-light text-dark border">
+                          {major.shortName}
+                        </span>
                       </div>
 
-                      <span className="badge bg-light text-dark border">
-                        {major.shortName}
+                      <h4 className="fw-bold">{major.title}</h4>
+
+                      <span
+                        className={`badge bg-${major.color}-subtle text-${major.color} mb-3 align-self-start`}
+                      >
+                        {getCategoryLabel(major.category)}
                       </span>
+
+                      <p className="text-secondary flex-grow-1">
+                        {major.description}
+                      </p>
+
+                      <button
+                        type="button"
+                        className={`btn btn-${major.color} mt-2 klh-arrow-hover`}
+                        onClick={function () {
+                          handleExploreMajor(major);
+                        }}
+                      >
+                        <span>{t("majorGuide.exploreMajor")}</span>
+                        <i className="bi bi-arrow-right ms-2"></i>
+                      </button>
                     </div>
-
-                    <h4 className="fw-bold">{major.title}</h4>
-
-                    <span
-                      className={`badge bg-${major.color}-subtle text-${major.color} mb-3 align-self-start`}
-                    >
-                      {getCategoryLabel(major.category)}
-                    </span>
-
-                    <p className="text-secondary flex-grow-1">
-                      {major.description}
-                    </p>
-
-                    <button
-                      type="button"
-                      className={`btn btn-${major.color} mt-2`}
-                      onClick={function () {
-                        handleExploreMajor(major);
-                      }}
-                    >
-                      {t("majorGuide.exploreMajor")}
-                      <i className="bi bi-arrow-right ms-2"></i>
-                    </button>
                   </div>
-                </div>
+                </Reveal>
               </div>
             );
           })}

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { ProgressRing, Reveal } from "../components/Motion";
 
 function GoalPlanner() {
   const { t } = useLanguage();
@@ -97,26 +99,28 @@ function GoalPlanner() {
   const progress = goalData ? (completedSteps.length / steps.length) * 100 : 0;
 
   return (
-    <main className="goal-planner-page py-5">
-      <div className="container">
-        <div className="text-center mb-5">
-          <span className="badge bg-danger-subtle text-danger px-3 py-2 mb-3">
-            🎯 {t("goalPlanner.badge")}
-          </span>
-
-          <h1 className="display-5 fw-bold">
+    <main className="goal-planner-page pb-5">
+      <PageHero
+        badge={`🎯 ${t("goalPlanner.badge")}`}
+        title={
+          <>
             {t("goalPlanner.heroTitleLine1")}
             <br />
-            {t("goalPlanner.heroTitleLine2")}
-          </h1>
+            <span className="text-danger">
+              {t("goalPlanner.heroTitleLine2")}
+            </span>
+          </>
+        }
+        subtitle={t("goalPlanner.heroDescription")}
+        color="danger"
+        align="center"
+        breadcrumbs={[
+          { label: t("navbar.life"), to: "/life" },
+          { label: t("life.tools.goal.title") },
+        ]}
+      />
 
-          <p
-            className="lead text-secondary mx-auto"
-            style={{ maxWidth: "700px" }}
-          >
-            {t("goalPlanner.heroDescription")}
-          </p>
-        </div>
+      <div className="container pt-5">
 
         <div className="row g-4">
           <div className="col-lg-6">
@@ -327,31 +331,40 @@ function GoalPlanner() {
                       </div>
                     </div>
 
-                    <div className="mb-4">
-                      <div className="d-flex justify-content-between mb-2">
-                        <span className="fw-semibold">
-                          {t("goalPlanner.result.progress")}
-                        </span>
+                    <div className="mb-4 p-3 rounded-4 bg-light border d-flex align-items-center justify-content-between gap-3">
+                      <div className="flex-grow-1">
+                        <div className="d-flex justify-content-between mb-2">
+                          <span className="fw-semibold">
+                            {t("goalPlanner.result.progress")}
+                          </span>
 
-                        <span className="text-secondary">
-                          {completedSteps.length}/{steps.length}
-                        </span>
+                          <span className="text-secondary">
+                            {completedSteps.length}/{steps.length}
+                          </span>
+                        </div>
+
+                        <div className="progress mb-2" style={{ height: "10px" }}>
+                          <div
+                            className="progress-bar bg-danger"
+                            role="progressbar"
+                            style={{
+                              width: `${progress}%`,
+                            }}
+                          ></div>
+                        </div>
+
+                        <small className="text-secondary">
+                          {progress.toFixed(0)}%{" "}
+                          {t("goalPlanner.result.completed")}
+                        </small>
                       </div>
 
-                      <div className="progress" style={{ height: "10px" }}>
-                        <div
-                          className="progress-bar bg-danger"
-                          role="progressbar"
-                          style={{
-                            width: `${progress}%`,
-                          }}
-                        ></div>
-                      </div>
-
-                      <small className="text-secondary">
-                        {progress.toFixed(0)}%{" "}
-                        {t("goalPlanner.result.completed")}
-                      </small>
+                      <ProgressRing
+                        value={progress}
+                        size={68}
+                        strokeWidth={6}
+                        color="#e11d48"
+                      />
                     </div>
 
                     <div className="mb-4">
@@ -435,9 +448,9 @@ function GoalPlanner() {
           </div>
         </div>
 
-        <div className="row mt-5 g-4">
+        <Reveal className="row mt-5 g-4">
           <div className="col-md-4">
-            <div className="card border-0 bg-primary-subtle rounded-4 h-100">
+            <div className="card border-0 bg-primary-subtle rounded-4 h-100 klh-hover-lift">
               <div className="card-body p-4">
                 <i className="bi bi-bullseye text-primary fs-2"></i>
 
@@ -469,7 +482,7 @@ function GoalPlanner() {
           </div>
 
           <div className="col-md-4">
-            <div className="card border-0 bg-warning-subtle rounded-4 h-100">
+            <div className="card border-0 bg-warning-subtle rounded-4 h-100 klh-hover-lift">
               <div className="card-body p-4">
                 <i className="bi bi-graph-up-arrow text-warning fs-2"></i>
 
@@ -483,7 +496,7 @@ function GoalPlanner() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </main>
   );

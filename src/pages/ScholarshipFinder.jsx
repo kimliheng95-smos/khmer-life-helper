@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { Reveal } from "../components/Motion";
 
 function ScholarshipFinder() {
   const { t } = useLanguage();
@@ -208,27 +210,28 @@ function ScholarshipFinder() {
   }
 
   return (
-    <main className="scholarship-finder-page py-5">
-      <div className="container">
-        {/* Header */}
-        <div className="text-center mb-5">
-          <span className="badge bg-primary-subtle text-primary px-3 py-2 mb-3">
-            🎓 {t("scholarshipFinder.badge")}
-          </span>
-
-          <h1 className="display-5 fw-bold">
+    <main className="scholarship-finder-page pb-5">
+      <PageHero
+        badge={`🎓 ${t("scholarshipFinder.badge")}`}
+        title={
+          <>
             {t("scholarshipFinder.heroTitleLine1")}
             <br />
-            {t("scholarshipFinder.heroTitleLine2")}
-          </h1>
+            <span className="klh-gradient-text">
+              {t("scholarshipFinder.heroTitleLine2")}
+            </span>
+          </>
+        }
+        subtitle={t("scholarshipFinder.heroDescription")}
+        color="primary"
+        align="center"
+        breadcrumbs={[
+          { label: t("navbar.student"), to: "/student" },
+          { label: t("student.tools.scholarship.title") },
+        ]}
+      />
 
-          <p
-            className="lead text-secondary mx-auto"
-            style={{ maxWidth: "700px" }}
-          >
-            {t("scholarshipFinder.heroDescription")}
-          </p>
-        </div>
+      <div className="container pt-5">
 
         {/* Filters */}
         <div className="card border-0 shadow-sm rounded-4 mb-4">
@@ -373,55 +376,57 @@ function ScholarshipFinder() {
 
         {/* Scholarship Cards */}
         <div className="row g-4">
-          {filteredScholarships.map(function (scholarship) {
+          {filteredScholarships.map(function (scholarship, index) {
             return (
               <div className="col-md-6" key={scholarship.id}>
-                <div className="card border-0 shadow-sm rounded-4 h-100">
-                  <div className="card-body p-4 d-flex flex-column">
-                    <div className="d-flex justify-content-between align-items-start mb-3">
-                      <div className="bg-primary-subtle text-primary rounded-3 p-3">
-                        <i className="bi bi-mortarboard fs-4"></i>
+                <Reveal delay={(index % 2) * 80} className="h-100" immediate>
+                  <div className="card border-0 shadow-sm rounded-4 h-100 klh-hover-lift">
+                    <div className="card-body p-4 d-flex flex-column">
+                      <div className="d-flex justify-content-between align-items-start mb-3">
+                        <div className="bg-primary-subtle text-primary rounded-3 p-3">
+                          <i className="bi bi-mortarboard fs-4"></i>
+                        </div>
+
+                        <span className="badge bg-success-subtle text-success">
+                          {getTypeLabel(scholarship.type)}
+                        </span>
                       </div>
 
-                      <span className="badge bg-success-subtle text-success">
-                        {getTypeLabel(scholarship.type)}
-                      </span>
+                      <h4 className="fw-bold">{scholarship.title}</h4>
+
+                      <p className="text-secondary mb-2">
+                        <i className="bi bi-building me-2"></i>
+                        {scholarship.provider}
+                      </p>
+
+                      <div className="d-flex flex-wrap gap-2 mb-3">
+                        <span className="badge bg-light text-dark border">
+                          {getLevelLabel(scholarship.level)}
+                        </span>
+
+                        <span className="badge bg-light text-dark border">
+                          {getFieldLabel(scholarship.field)}
+                        </span>
+                      </div>
+
+                      <p className="text-secondary flex-grow-1">
+                        {scholarship.description}
+                      </p>
+
+                      <button
+                        type="button"
+                        className="btn btn-primary align-self-start klh-arrow-hover"
+                        onClick={function () {
+                          openRequirements(scholarship);
+                        }}
+                      >
+                        <span>{t("scholarshipFinder.viewRequirements")}</span>
+
+                        <i className="bi bi-arrow-right ms-2"></i>
+                      </button>
                     </div>
-
-                    <h4 className="fw-bold">{scholarship.title}</h4>
-
-                    <p className="text-secondary mb-2">
-                      <i className="bi bi-building me-2"></i>
-                      {scholarship.provider}
-                    </p>
-
-                    <div className="d-flex flex-wrap gap-2 mb-3">
-                      <span className="badge bg-light text-dark border">
-                        {getLevelLabel(scholarship.level)}
-                      </span>
-
-                      <span className="badge bg-light text-dark border">
-                        {getFieldLabel(scholarship.field)}
-                      </span>
-                    </div>
-
-                    <p className="text-secondary flex-grow-1">
-                      {scholarship.description}
-                    </p>
-
-                    <button
-                      type="button"
-                      className="btn btn-primary align-self-start"
-                      onClick={function () {
-                        openRequirements(scholarship);
-                      }}
-                    >
-                      {t("scholarshipFinder.viewRequirements")}
-
-                      <i className="bi bi-arrow-right ms-2"></i>
-                    </button>
                   </div>
-                </div>
+                </Reveal>
               </div>
             );
           })}

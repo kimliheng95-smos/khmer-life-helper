@@ -2988,6 +2988,87 @@ const en = {
   Advanced: "Advanced",
   "Full-time": "Full-time",
   "Part-time": "Part-time",
+  ui: {
+    nav: {
+      tools: "Tools",
+      search: "Search tools...",
+    },
+    search: {
+      title: "Quick Search",
+      placeholder: "Search tools, roadmaps, CV builder, scholarships...",
+      pageLabel: "Platform Page",
+      noResults: "No matching tools found",
+      navigate: "to navigate",
+      open: "to open",
+    },
+    home: {
+      liveTag: "Free Platform for Cambodian Youth",
+      stats: {
+        tools: "Interactive Tools",
+        roadmaps: "12-Week Plans",
+        free: "Free & Private",
+      },
+      preview: {
+        windowTitle: "Khmer Life OS",
+        readyBadge: "Ready to use",
+        progressLabel: "Goal",
+        chip1Title: "CV PDF Ready",
+        chip1Sub: "Instant live preview",
+        chip2Title: "Saved Locally",
+        chip2Sub: "No account needed",
+      },
+      allToolsLabel: "ALL-IN-ONE TOOLKIT",
+      allToolsTitle: "Every tool you need in one place",
+      allToolsDesc:
+        "Jump straight into practical planners, builders, and guides built for real student and career goals.",
+      openDashboard: "Open My Dashboard",
+      why: {
+        badge: "WHY KHMER LIFE HELPER",
+        title: "Built for real clarity, not clutter",
+        items: [
+          {
+            title: "Bilingual Khmer & English",
+            desc: "Switch smoothly between Khmer and English anytime across every single tool and guide.",
+          },
+          {
+            title: "100% Free & Private",
+            desc: "Your progress, CV, and plans stay securely in your browser without mandatory sign-ups.",
+          },
+          {
+            title: "Actionable Step-by-Step",
+            desc: "Turn big dreams into weekly checklists, budgets, roadmaps, and real interview preparation.",
+          },
+        ],
+      },
+    },
+    nextStep: {
+      step1: "Goal",
+      step2: "Details",
+      step3: "Roadmap",
+    },
+    dashboard: {
+      allWeeks: "All 12 Weeks",
+      thisWeekOnly: "This Week Only",
+    },
+    cv: {
+      completeness: "CV Completeness",
+      accentColor: "Theme",
+    },
+    budget: {
+      sampleButton: "Try Sample",
+      breakdownTitle: "Expense Breakdown",
+    },
+    footer: {
+      creatorRole: "Creator & Developer",
+      studentTools: "Student Tools",
+      careerTools: "Career Tools",
+      backToTop: "Back to top",
+      madeWithPurpose: "Built for Cambodian students and young professionals",
+    },
+    ad: {
+      tip: "Start your 12-week personal action roadmap today — completely free, bilingual, and saved automatically.",
+    },
+  },
 };
 
 export default en;

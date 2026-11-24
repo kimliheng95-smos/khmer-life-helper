@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { ProgressRing, Reveal } from "../components/Motion";
 
 function CareerRoadmap() {
   const { t } = useLanguage();
@@ -257,27 +259,25 @@ function CareerRoadmap() {
     : 0;
 
   return (
-    <main className="career-roadmap-page py-5">
-      <div className="container">
+    <main className="career-roadmap-page pb-5">
+      {!roadmap && (
+        <PageHero
+          badge={t("careerRoadmap.badge")}
+          badgeIcon="bi-graph-up-arrow"
+          title={t("careerRoadmap.heroTitle")}
+          subtitle={t("careerRoadmap.heroDescription")}
+          color="danger"
+          align="center"
+          breadcrumbs={[
+            { label: t("navbar.career"), to: "/career" },
+            { label: t("career.tools.roadmap.title") },
+          ]}
+        />
+      )}
+
+      <div className="container pt-5">
         {!roadmap ? (
           <>
-            <div className="text-center mb-5">
-              <span className="badge bg-danger-subtle text-danger px-3 py-2 mb-3">
-                <i className="bi bi-graph-up-arrow me-2"></i>
-                {t("careerRoadmap.badge")}
-              </span>
-
-              <h1 className="display-5 fw-bold">
-                {t("careerRoadmap.heroTitle")}
-              </h1>
-
-              <p
-                className="lead text-secondary mx-auto"
-                style={{ maxWidth: "750px" }}
-              >
-                {t("careerRoadmap.heroDescription")}
-              </p>
-            </div>
 
             <div className="row justify-content-center">
               <div className="col-lg-8">
@@ -509,33 +509,44 @@ function CareerRoadmap() {
               </button>
             </div>
 
-            <div className="card border-0 shadow-sm rounded-4 mb-4">
-              <div className="card-body p-4">
-                <div className="d-flex justify-content-between align-items-center mb-2">
-                  <h5 className="fw-bold mb-0">
-                    {t("careerRoadmap.progress.title")}
-                  </h5>
+            <Reveal>
+              <div className="card border-0 shadow-sm rounded-4 mb-4">
+                <div className="card-body p-4 d-flex align-items-center justify-content-between gap-3">
+                  <div className="flex-grow-1">
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+                      <h5 className="fw-bold mb-0">
+                        {t("careerRoadmap.progress.title")}
+                      </h5>
 
-                  <strong className="text-danger">{progress}%</strong>
+                      <strong className="text-danger">{progress}%</strong>
+                    </div>
+
+                    <div
+                      className="progress"
+                      role="progressbar"
+                      style={{ height: "12px" }}
+                    >
+                      <div
+                        className="progress-bar bg-danger"
+                        style={{ width: `${progress}%` }}
+                      ></div>
+                    </div>
+
+                    <p className="text-secondary small mt-2 mb-0">
+                      {completedSteps.length} {t("careerRoadmap.progress.of")}{" "}
+                      {roadmap.length} {t("careerRoadmap.progress.completed")}
+                    </p>
+                  </div>
+
+                  <ProgressRing
+                    value={progress}
+                    size={74}
+                    strokeWidth={6}
+                    color="#e11d48"
+                  />
                 </div>
-
-                <div
-                  className="progress"
-                  role="progressbar"
-                  style={{ height: "12px" }}
-                >
-                  <div
-                    className="progress-bar bg-danger"
-                    style={{ width: `${progress}%` }}
-                  ></div>
-                </div>
-
-                <p className="text-secondary small mt-2 mb-0">
-                  {completedSteps.length} {t("careerRoadmap.progress.of")}{" "}
-                  {roadmap.length} {t("careerRoadmap.progress.completed")}
-                </p>
               </div>
-            </div>
+            </Reveal>
 
             <div className="row g-4">
               <div className="col-lg-8">

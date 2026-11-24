@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "../context/useLanguage";
+import PageHero from "../components/PageHero";
+import { ProgressRing, Reveal } from "../components/Motion";
 
 function InterviewPractice() {
   const { t } = useLanguage();
@@ -166,56 +168,59 @@ function InterviewPractice() {
   const progress = (answeredCount / questions.length) * 100;
 
   return (
-    <main className="interview-practice-page py-5">
-      <div className="container">
-        <div className="text-center mb-5">
-          <span className="badge bg-success-subtle text-success px-3 py-2 mb-3">
-            <i className="bi bi-chat-dots me-2"></i>
-            {t("interviewPractice.badge")}
-          </span>
+    <main className="interview-practice-page pb-5">
+      <PageHero
+        badge={t("interviewPractice.badge")}
+        badgeIcon="bi-chat-dots"
+        title={t("interviewPractice.heroTitle")}
+        subtitle={t("interviewPractice.heroDescription")}
+        color="success"
+        align="center"
+        breadcrumbs={[
+          { label: t("navbar.career"), to: "/career" },
+          { label: t("career.tools.interview.title") },
+        ]}
+      />
 
-          <h1 className="display-5 fw-bold">
-            {t("interviewPractice.heroTitle")}
-          </h1>
+      <div className="container pt-5">
+        <Reveal>
+          <div className="card border-0 shadow-sm rounded-4 mb-4">
+            <div className="card-body p-4">
+              <div className="row align-items-center g-3">
+                <div className="col-lg-9">
+                  <h5 className="fw-bold mb-2">
+                    {t("interviewPractice.progressTitle")}
+                  </h5>
 
-          <p
-            className="lead text-secondary mx-auto"
-            style={{ maxWidth: "700px" }}
-          >
-            {t("interviewPractice.heroDescription")}
-          </p>
-        </div>
+                  <div className="progress mb-2" style={{ height: "10px" }}>
+                    <div
+                      className="progress-bar bg-success"
+                      role="progressbar"
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
 
-        <div className="card border-0 shadow-sm rounded-4 mb-4">
-          <div className="card-body p-4">
-            <div className="row align-items-center">
-              <div className="col-lg-8">
-                <h5 className="fw-bold mb-2">
-                  {t("interviewPractice.progressTitle")}
-                </h5>
-
-                <div className="progress" style={{ height: "10px" }}>
-                  <div
-                    className="progress-bar bg-success"
-                    role="progressbar"
-                    style={{ width: `${progress}%` }}
-                  ></div>
+                  <small className="text-secondary">
+                    {answeredCount}/{questions.length}{" "}
+                    {t("interviewPractice.questionsPracticed")}
+                  </small>
                 </div>
 
-                <small className="text-secondary">
-                  {answeredCount}/{questions.length}{" "}
-                  {t("interviewPractice.questionsPracticed")}
-                </small>
-              </div>
-
-              <div className="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                <span className="badge bg-success fs-6 px-3 py-2">
-                  {progress.toFixed(0)}% {t("interviewPractice.complete")}
-                </span>
+                <div className="col-lg-3 d-flex justify-content-lg-end align-items-center gap-3">
+                  <ProgressRing
+                    value={progress}
+                    size={70}
+                    strokeWidth={6}
+                    color="#059669"
+                  />
+                  <span className="badge bg-success fs-6 px-3 py-2">
+                    {progress.toFixed(0)}% {t("interviewPractice.complete")}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
 
         <div className="mb-4">
           <div className="d-flex flex-wrap gap-2">
@@ -440,9 +445,9 @@ function InterviewPractice() {
           </div>
         </div>
 
-        <div className="row mt-5 g-4">
+        <Reveal className="row mt-5 g-4">
           <div className="col-md-4">
-            <div className="card border-0 bg-primary-subtle rounded-4 h-100">
+            <div className="card border-0 bg-primary-subtle rounded-4 h-100 klh-hover-lift">
               <div className="card-body p-4">
                 <i className="bi bi-person-check text-primary fs-2"></i>
 
@@ -474,7 +479,7 @@ function InterviewPractice() {
           </div>
 
           <div className="col-md-4">
-            <div className="card border-0 bg-warning-subtle rounded-4 h-100">
+            <div className="card border-0 bg-warning-subtle rounded-4 h-100 klh-hover-lift">
               <div className="card-body p-4">
                 <i className="bi bi-arrow-repeat text-warning fs-2"></i>
 
@@ -488,7 +493,7 @@ function InterviewPractice() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </main>
   );

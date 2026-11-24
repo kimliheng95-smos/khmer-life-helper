@@ -2,49 +2,59 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../context/useLanguage";
 
 function Footer() {
-  const { t } = useLanguage();
+  const { language, changeLanguage, t } = useLanguage();
 
   return (
     <footer className="footer">
       <div className="container py-5">
         <div className="row g-4">
-          <div className="col-lg-5">
-            <h5 className="fw-bold d-flex align-items-center gap-2">
+          <div className="col-lg-4">
+            <h5 className="fw-bold d-flex align-items-center gap-2 text-white">
               <img
                 src={`${import.meta.env.BASE_URL}logo.svg`}
                 alt="Khmer Life Helper"
-                width="28"
-                height="28"
+                width="32"
+                height="32"
                 className="brand-logo"
               />
-              Khmer Life Helper
+              <span>Khmer Life Helper</span>
             </h5>
 
-            <p className="text-secondary mt-3 mb-2">{t("footer.tagline")}</p>
+            <p className="text-white-50 mt-3 mb-2 fw-medium">
+              {t("footer.tagline")}
+            </p>
 
-            <p className="text-secondary small mb-3">
+            <p className="text-secondary small mb-4">
               {t("footer.description")}
             </p>
 
-            {/* Author photo */}
-            <div className="d-flex align-items-center gap-3">
+            {/* Author card */}
+            <div
+              className="d-inline-flex align-items-center gap-3 p-2 pe-3 rounded-4"
+              style={{
+                background: "rgba(255, 255, 255, 0.04)",
+                border: "1px solid rgba(148, 163, 184, 0.16)",
+              }}
+            >
               <img
                 src={`${import.meta.env.BASE_URL}author.jpg`}
                 alt="Kim Liheng"
-                width="48"
-                height="48"
-                className="rounded-circle border"
+                width="44"
+                height="44"
+                className="rounded-circle"
                 style={{ objectFit: "cover" }}
               />
               <div>
-                <div className="fw-semibold small">Kim Liheng</div>
-                <div className="text-secondary small">Creator</div>
+                <div className="fw-semibold small text-white">Kim Liheng</div>
+                <div className="text-secondary" style={{ fontSize: "0.75rem" }}>
+                  {t("ui.footer.creatorRole")}
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="col-6 col-lg-2">
-            <h6 className="fw-bold">{t("footer.explore")}</h6>
+          <div className="col-6 col-md-3 col-lg-2">
+            <h6 className="fw-bold text-white">{t("footer.explore")}</h6>
 
             <ul className="footer-links">
               <li>
@@ -59,34 +69,74 @@ function Footer() {
               <li>
                 <Link to="/life">{t("footer.links.life")}</Link>
               </li>
-            </ul>
-          </div>
-
-          <div className="col-6 col-lg-2">
-            <h6 className="fw-bold">{t("footer.tools")}</h6>
-
-            <ul className="footer-links">
               <li>
                 <Link to="/next-step">{t("footer.links.nextStep")}</Link>
               </li>
               <li>
                 <Link to="/dashboard">{t("footer.links.dashboard")}</Link>
               </li>
+            </ul>
+          </div>
+
+          <div className="col-6 col-md-3 col-lg-2">
+            <h6 className="fw-bold text-white">{t("ui.footer.studentTools")}</h6>
+
+            <ul className="footer-links">
+              <li>
+                <Link to="/student/scholarships">
+                  {t("student.tools.scholarship.title")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/student/majors">
+                  {t("student.tools.major.title")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/student/study-guide">
+                  {t("student.tools.study.title")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/student/learning-roadmap">
+                  {t("student.tools.roadmap.title")}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="col-6 col-md-3 col-lg-2">
+            <h6 className="fw-bold text-white">{t("ui.footer.careerTools")}</h6>
+
+            <ul className="footer-links">
               <li>
                 <Link to="/career/cv-builder">
-                  {t("footer.links.cvBuilder")}
+                  {t("career.tools.cv.title")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/career/interview">
+                  {t("career.tools.interview.title")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/career/internships">
+                  {t("career.tools.internship.title")}
                 </Link>
               </li>
               <li>
                 <Link to="/life/budget">{t("footer.links.budgetPlanner")}</Link>
               </li>
+              <li>
+                <Link to="/life/goals">{t("life.tools.goal.title")}</Link>
+              </li>
             </ul>
           </div>
 
-          <div className="col-lg-3">
-            <h6 className="fw-bold">{t("footer.followUs")}</h6>
+          <div className="col-6 col-md-3 col-lg-2">
+            <h6 className="fw-bold text-white">{t("footer.followUs")}</h6>
 
-            <div className="d-flex gap-3 mt-3">
+            <div className="d-flex gap-2 mt-3 mb-4">
               <a
                 href="https://www.facebook.com/KimLiheng.77/?_rdc=6&_rdr#"
                 target="_blank"
@@ -117,13 +167,37 @@ function Footer() {
                 <i className="bi bi-tiktok"></i>
               </a>
             </div>
+
+            <div className="d-inline-flex gap-1 p-1 rounded-3" style={{ background: "rgba(255,255,255,0.06)" }}>
+              <button
+                type="button"
+                onClick={() => changeLanguage("en")}
+                className={`btn btn-sm px-2 py-1 border-0 ${
+                  language === "en" ? "btn-primary text-white" : "text-secondary"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => changeLanguage("kh")}
+                className={`btn btn-sm px-2 py-1 border-0 ${
+                  language === "kh" ? "btn-primary text-white" : "text-secondary"
+                }`}
+              >
+                ខ្មែរ
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <div className="container text-center">
+        <div className="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
           <small>{t("footer.copyright")}</small>
+          <small className="text-secondary">
+            🇰🇭 {t("ui.footer.madeWithPurpose")}
+          </small>
         </div>
       </div>
     </footer>
@@ -131,4 +205,3 @@ function Footer() {
 }
 
 export default Footer;
-
